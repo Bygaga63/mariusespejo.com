@@ -50,7 +50,7 @@ export let loader: LoaderFunction = () => {
 export let meta: MetaFunction = () => {
   return {
     title: "Marius Espejo",
-    description: "Hello!"
+    description: "Marius Espejo's personal site"
   };
 };
 
