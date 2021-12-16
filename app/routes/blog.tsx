@@ -21,9 +21,3 @@ export default function Blog() {
   );
 }
 
-export let meta: MetaFunction = () => {
-  return {
-    title: "Blog | Marius Espejo",
-    description: "Blog posts by Marius Espejo"
-  };
-};
