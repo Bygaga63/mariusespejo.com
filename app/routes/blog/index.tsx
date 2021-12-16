@@ -1,51 +1,22 @@
 import { Link, useLoaderData } from 'remix';
 import type { LoaderFunction, MetaFunction } from 'remix';
-import path from 'path';
-import fs from 'fs/promises';
-import parseFrontMatter from 'front-matter';
+import { getPosts, Post } from '~/post';
 
-export let loader: LoaderFunction = (whatthis) => {
+export let loader: LoaderFunction = () => {
   return getPosts();
 };
-
-export type Post = {
-  slug: string;
-  title: string;
-  date: string;
-};
-
-const postsPath = path.join(__dirname, '../..', 'app/routes/blog');
-
-export async function getPosts(): Promise<Post[]> {
-  const dir = await fs.readdir(postsPath);
-  return Promise.all(
-    dir
-      .filter((filename) => filename.includes('.mdx'))
-      .map(async (filename) => {
-        const file = await fs.readFile(path.join(postsPath, filename));
-        const { attributes } = parseFrontMatter<Record<string, any>>(
-          file.toString()
-        );
-        return {
-          slug: filename.replace(/\.mdx$/, ''),
-          title: attributes.title,
-          date: attributes.date,
-        };
-      })
-  );
-}
 
 export default function BlogIndex() {
   const posts = useLoaderData<Post[]>();
 
   return (
     <div>
-      <h2>I should probably list out the articles here eh?</h2>
-      Here you go.
+      <h2>Articles</h2>
+
       <ul>
         {posts.map((post) => (
           <li key={post.slug}>
-            {new Date(post.date).toDateString()}:
+            <span style={{marginRight: 10}}>{new Date(post.date).toUTCString().substring(0,16)}:</span>
 
             <Link to={post.slug}>{post.title}</Link>
           </li>

@@ -1,8 +1,8 @@
 import styles from 'highlight.js/styles/github-dark-dimmed.css';
 import type { LinksFunction, LoaderFunction } from 'remix';
-import { MetaFunction, Outlet } from "remix";
+import { Outlet } from "remix";
 
-export let loader: LoaderFunction = (whatthis) => {
+export let loader: LoaderFunction = () => {
   return null;
 }
 
