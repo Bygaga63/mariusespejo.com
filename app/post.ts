@@ -8,7 +8,7 @@ export type Post = {
   date: string;
 };
 
-const postsPath = path.join(__dirname, '../..', 'build/routes/blog');
+const postsPath = path.join(__dirname, '../../../..', 'build/routes/blog');
 
 export async function getPosts(): Promise<Post[]> {
   const dir = await fs.readdir(postsPath);
